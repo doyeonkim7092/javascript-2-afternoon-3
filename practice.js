@@ -24,11 +24,15 @@
 
 /*
   Write a function called first that takes in two parameters, an array and a callback function.
-  Then invoke the callback function, passing in the first element in the array as it's argument.
+  배열과 콜백 함수라는 두개의 매개변수를 받는 first라는 함수를 작성하세요
+  Then invoke(부르다) the callback function, passing in the first element in the array as it's argument.
+  그 후 배열의 첫 번째 요소를 인자로 전달하여 콜백 함수를 호출하세요.
 */
 
 // Code Here 
-
+const first = function(names, callback){
+  callback(names[0])
+}
 // Do not edit the code below.
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 
@@ -48,6 +52,9 @@ first(names, function(firstName){
 */
 
 //Code Here
+const last = function(names, callback){
+  callback(names[names.length-1])
+}
 
 // Do not edit the code below.
 last(names, function(lastName){
@@ -66,6 +73,9 @@ last(names, function(lastName){
 */
 
 //Code Here
+const multiply = function(num1,num2, callback){
+  callback(num1*num2)
+}
 
 // Do not edit the code below.
 multiply(4, 3, function(answer){
@@ -85,7 +95,16 @@ multiply(4, 3, function(answer){
 */
 
 //Code Here 
-
+const contains=function(names, name, callback){
+  for(let i=0; i<names.length; i++){
+    if(names[i]===name){
+      callback(true) 
+    }
+    else{
+      callback(false)
+    }
+  }
+}
 // Do not edit the code below.
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -103,9 +122,37 @@ contains(names, 'Colt', function(result){
 /*
   Write a function called uniq that takes in an array and a callback function.
   Remove any duplicate values from the array, and invoke the callback with the modified array as an argument.
+  배열에서 중복값을 제거하고, 수정된 배열을 콜백으로 불러와라
 */
 
-//Code Here
+//Code Here [check ARRAY METHOD]
+
+//solution01
+// const uniq = function(names, callback){
+//   let set = Array.from(new Set(names))
+//   callback(set)
+// }
+
+//soultion02-1
+// const uniq = function(names, callback){
+//   let reduced = names.reduce((acc,cur)=>{
+//     return acc.includes(cur) ? acc : [...acc,cur]
+//   },[])
+//   callback(reduced)
+// }
+
+//solution02-2
+const uniq = function(names, callback){
+  let reduced = names.reduce((acc, cur)=>{
+    if(acc.includes(cur)){
+      return acc;
+    }
+    else{
+      return [...acc, cur]
+    }
+  },[])
+  callback(reduced)
+}
 
 // Do not edit the code below.
 uniq(names, function(uniqArr){
@@ -119,10 +166,17 @@ uniq(names, function(uniqArr){
 
 /* 
   Write a function called each that takes in an array of names and a callback function. 
+  이름의 배열과 콜백 함수를 취하는 각각의 함수를 작성하십시오.
   For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
+  배열의 각 이름에 대해 콜백을 호출하고 이름과 이름의 색인을 인수로 전달하십시오.
 */
 
-//Code Here 
+//Code Here
+const each = function(names, callback){
+  for(let i=0; i<names.length; i++){
+    callback(names[i], i)
+  }
+} 
 
 // Do not edit the code below.
 each(names, function(item, indice){
@@ -136,10 +190,19 @@ each(names, function(item, indice){
 
 /*
   Write a function called getUserById that takes in three parameters: an array of objects (users), an id and a callback, and searches for the user with a matching id.
+  getUserById라는 함수를 작성하여 객체 (사용자) 배열, ID 및 콜백의 세 가지 매개 변수를 사용하고 일치하는 ID로 사용자를 검색하십시오.
   When the correct user object is found, invoke the callback with the user object as an argument.
+  올바른 사용자 객체가 발견되면 사용자 객체를 인수로 사용하여 콜백을 호출하십시오.
 */
 
 // Code here
+const getUserById = function(users, id, callback){
+  for(let i=0;i<users.length; i++){
+    if(users[i].id===id){
+      callback(users[i])
+    }
+  }
+}
 
 // Do not edit the code below.
 var users = [
